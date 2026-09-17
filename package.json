@@ -1,9 +1,19 @@
 {
-  "name": "kim-discord-activity",
-  "version": "1.0.0",
+  "name": "kim-discord-bot",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "scripts": {"dev":"vite --host 0.0.0.0","build":"vite build","preview":"vite preview --host 0.0.0.0"},
-  "dependencies": {"@discord/embedded-app-sdk":"latest"},
-  "devDependencies": {"vite":"latest"}
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@discord/embedded-app-sdk": "latest",
+    "discord.js": "^14.22.1"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
 }
