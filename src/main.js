@@ -15,7 +15,6 @@ app.innerHTML = `
   </section>
   <section class="meter"><div class="meterTop"><span>12:00</span><b id="timeLabel">--:--</b><span>01:30</span></div><div class="track"><div id="fill" class="fill"></div><i id="pin"></i></div></section>
   <section class="cards"><div><span>AIM ACCURACY</span><strong id="aim">95%</strong><div class="aimbar"><i id="aimfill"></i></div></div><div><span>TILSTAND</span><strong id="state">Rolig</strong><small id="sleepWarning"></small></div></section>
-  <section class="states"><img src="${asset('images/kim-state-1.png')}"><img src="${asset('images/kim-state-2.png')}"><img src="${asset('images/kim-state-3.png')}"><img src="${asset('images/kim-state-4.png')}"><img src="${asset('images/kim-state-5.png')}"></section>
 </main>`;
 
 function osloParts(){
@@ -52,8 +51,6 @@ function update(){
 update();
 setInterval(update,30000);
 
-// The Embedded App SDK is only initialized when KIM is actually embedded in Discord.
-// This keeps the normal GitHub Pages URL usable as a standalone preview.
 if (window.self !== window.top) {
   try {
     const discordSdk = new DiscordSDK(CLIENT_ID);
