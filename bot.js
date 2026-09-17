@@ -68,8 +68,23 @@ function makeEmbed() {
 }
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
-await rest.put(Routes.applicationCommands(CLIENT_ID), { body: [command.toJSON()] });
-console.log('/kim registered.');
+
+// Create/update only /kim. Do not bulk-overwrite global commands because this
+// application also has an Activity Entry Point command managed by Discord.
+const existingCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
+const existingKim = existingCommands.find(c => c.type === 1 && c.name === 'kim');
+
+if (existingKim) {
+  await rest.patch(Routes.applicationCommand(CLIENT_ID, existingKim.id), {
+    body: command.toJSON()
+  });
+  console.log('/kim updated without touching the Activity entry point.');
+} else {
+  await rest.post(Routes.applicationCommands(CLIENT_ID), {
+    body: command.toJSON()
+  });
+  console.log('/kim created without touching the Activity entry point.');
+}
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once('ready', () => console.log(`KIM online as ${client.user.tag}`));
